@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Grammar"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FAFAFA"
+        android:padding="24dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grammar Practice"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1D3557"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Lesson Topic -->
+        <TextView
+            android:id="@+id/tvLesson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesson: Subject + Verb"
+            android:textSize="18sp"
+            android:textColor="#2A9D8F"
+            android:layout_marginBottom="16dp" />
+
+        <!-- English Sentence -->
+        <TextView
+            android:id="@+id/tvEnglishSentence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am a student."
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Bangla Translation -->
+        <TextView
+            android:id="@+id/tvBanglaTranslation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="আমি একজন ছাত্র।"
+            android:textSize="18sp"
+            android:textColor="#555555"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Play Audio Button -->
+        <Button
+            android:id="@+id/btnPlayAudio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔊 Play Audio"
+            android:backgroundTint="#E76F51"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Next Button -->
+        <Button
+            android:id="@+id/btnNextGrammar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next ➡️"
+            android:backgroundTint="#457B9D"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
