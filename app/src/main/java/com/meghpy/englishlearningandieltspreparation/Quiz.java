@@ -41,7 +41,7 @@ public class Quiz extends AppCompatActivity {
                             .commit();
                 }else if (tabPosition == 2){
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fLayout, new HomeFragment())
+                            .replace(R.id.fLayout, new QuizFragment())
                             .commit();
                 }
             }
