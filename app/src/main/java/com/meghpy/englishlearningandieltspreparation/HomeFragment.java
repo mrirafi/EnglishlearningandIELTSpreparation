@@ -34,6 +34,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        btnGrammar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getActivity(),Grammar.class));
+            }
+        });
+
         return myView;
     }
 }

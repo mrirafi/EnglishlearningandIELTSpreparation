@@ -1,86 +1,145 @@
 package com.meghpy.englishlearningandieltspreparation;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Grammar extends AppCompatActivity {
 
-    private TextView tvLesson, tvEnglish, tvBangla;
-    private Button btnPlayAudio, btnNext;
-
-    private ArrayList<GrammarItem> grammarList;
-    private int currentIndex = 0;
-    private MediaPlayer mediaPlayer; // Optional if using audio
+   RecyclerView recyclerView;
+   HashMap<String,String> hashMap;
+   ArrayList<HashMap<String,String>> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grammar);
 
-        tvLesson = findViewById(R.id.tvLesson);
-        tvEnglish = findViewById(R.id.tvEnglishSentence);
-        tvBangla = findViewById(R.id.tvBanglaTranslation);
-        btnPlayAudio = findViewById(R.id.btnPlayAudio);
-        btnNext = findViewById(R.id.btnNextGrammar);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        grammarList = new ArrayList<>();
-        loadData();
 
-        displayItem(currentIndex);
+        arrayList = new ArrayList<>();
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Noun");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Pronoun");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Adjective");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Verb");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Adverb");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Preposition");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Conjunction");
+        arrayList.add(hashMap);
+
+        hashMap = new HashMap<>();
+        hashMap.put("topic","Interjection");
+        arrayList.add(hashMap);
+
+
+        hashMap = new HashMap<>();
+
+        xAdapter adapter = new xAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Grammar.this));
+
+
+    }
+
+//======================
+    private class xAdapter extends RecyclerView.Adapter{
+
+        private class grammarViewHolder extends RecyclerView.ViewHolder{
+
+            TextView tvGrammarTopic;
+
+            public grammarViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                tvGrammarTopic = itemView.findViewById(R.id.tvGrammarTopic);
+            }
+        }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        CardView cardGrammar;
+
+        LayoutInflater inflater = getLayoutInflater();
+        View myView = inflater.inflate(R.layout.grammar_item,parent,false);
+
+        cardGrammar = myView.findViewById(R.id.cardGrammar);
+
+        cardGrammar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentIndex++;
-                if (currentIndex >= grammarList.size()) currentIndex = 0; // loop
-                displayItem(currentIndex);
+
+                startActivity(new Intent(Grammar.this,Quiz.class));
+
             }
         });
 
-        btnPlayAudio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Optional: play an audio file corresponding to current sentence
-                // For demo, this assumes you have matching audio files in res/raw
-                int audioResId = getResources().getIdentifier("audio_" + currentIndex, "raw", getPackageName());
-                if (mediaPlayer != null) mediaPlayer.release();
-                mediaPlayer = MediaPlayer.create(Grammar.this, audioResId);
-                mediaPlayer.start();
-            }
-        });
-    }
 
-    private void loadData() {
-        grammarList.add(new GrammarItem("Lesson: Subject + Verb", "I am a student.", "আমি একজন ছাত্র।"));
-        grammarList.add(new GrammarItem("Lesson: Subject + Verb", "She is a teacher.", "সে একজন শিক্ষক।"));
-        grammarList.add(new GrammarItem("Lesson: Subject + Verb", "They are friends.", "তারা বন্ধু।"));
-        // Add more items here
-    }
 
-    private void displayItem(int index) {
-        GrammarItem item = grammarList.get(index);
-        tvLesson.setText(item.getLessonTitle());
-        tvEnglish.setText(item.getEnglishSentence());
-        tvBangla.setText(item.getBanglaTranslation());
+        return new grammarViewHolder(myView);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+            grammarViewHolder grammarHolder = (grammarViewHolder) holder;
+
+            hashMap = arrayList.get(position);
+            String topic = hashMap.get("topic");
+            grammarHolder.tvGrammarTopic.setText(topic);
+
+
     }
+
+    @Override
+    public int getItemCount() {
+        return arrayList.size();
+    }
+
+
+
+}
+
+
+//======================
 }

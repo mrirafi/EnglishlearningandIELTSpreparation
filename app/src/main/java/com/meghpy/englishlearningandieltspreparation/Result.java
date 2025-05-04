@@ -86,7 +86,7 @@ public class Result extends AppCompatActivity {
 
         // Button: Next
         btnNext.setOnClickListener(v -> {
-            Intent nextIntent = new Intent(Result.this, Quiz.class);
+            Intent nextIntent = new Intent(Result.this, Grammar.class);
             startActivity(nextIntent);
             finish();
         });

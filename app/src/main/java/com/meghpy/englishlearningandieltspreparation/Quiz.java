@@ -22,9 +22,9 @@ public class Quiz extends AppCompatActivity {
         tabLay = findViewById(R.id.tabLay);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fLayout, new QuizFragment())
+                .replace(R.id.fLayout, new PracticeFragment())
                 .commit();
-        tabLay.getTabAt(1).select();
+        tabLay.getTabAt(0).select();
 
         tabLay.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -33,7 +33,7 @@ public class Quiz extends AppCompatActivity {
 
                 if (tabPosition == 0 ){
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fLayout, new HomeFragment())
+                            .replace(R.id.fLayout, new PracticeFragment())
                             .commit();
                 }else if (tabPosition == 1){
                     getSupportFragmentManager().beginTransaction()
