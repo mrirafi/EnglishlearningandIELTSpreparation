@@ -1,6 +1,7 @@
 package com.meghpy.englishlearningandieltspreparation;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Grammar extends AppCompatActivity {
 
@@ -99,11 +101,20 @@ public class Grammar extends AppCompatActivity {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         CardView cardGrammar;
+        TextView tvGrammarTopic;
 
         LayoutInflater inflater = getLayoutInflater();
         View myView = inflater.inflate(R.layout.grammar_item,parent,false);
 
         cardGrammar = myView.findViewById(R.id.cardGrammar);
+        tvGrammarTopic = myView.findViewById(R.id.tvGrammarTopic);
+
+        Random random = new Random();
+        int color = Color.argb(254,
+                200 + random.nextInt(56),  // Range: 200-255
+                200 + random.nextInt(56),  // Range: 200-255
+                200 + random.nextInt(56)); // Range: 200-255
+        tvGrammarTopic.setBackgroundColor(color);
 
         cardGrammar.setOnClickListener(new View.OnClickListener() {
             @Override
